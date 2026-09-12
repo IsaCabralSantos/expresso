@@ -1,3 +1,4 @@
+
 # (Placeholder) — Plataforma de Gestão de Tarefas e Fluxos de Trabalho
 
 Projeto desenvolvido como Projeto Integrador (PI) em parceria com a **Pinhalense**, com o objetivo de criar uma plataforma web de gestão de tarefas e fluxos de trabalho colaborativos.
@@ -51,3 +52,5 @@ Projeto desenvolvido para: **Pinhalense**
 - Vitor Leoncio Bartalini
 
 ##  Licença
+
+<img width="751" height="1425" alt="fluxograma geral" src="https://github.com/user-attachments/assets/dc660f81-9506-46f9-882b-92891dd7e5f0" />
