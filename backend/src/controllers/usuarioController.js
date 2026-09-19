@@ -64,10 +64,52 @@ async function excluirUsuario(req, res, next) {
         next(error);
     }
 }
+async function atualizarUsuario(req, res, next) {
+    try{
+        const { id } = req.params;
+        const CAMPOS_PERMITIDOS = [];
+        const valores = [];
+    
+        CAMPOS_PERMITIDOS.forEach((campo) =>  {
+            if (req.body[campo] !== undefined){
+                camposParaAtualizar.push(`${campo} = ?`);
+                valores.push(req.body[campo]);
+            }
+        });
+if (camposParaAtualizar.length == 0){
+    return res.status(400).json({
+        erro: 'Envie ao menos um campo para',
+        campos_aceitos: CAMPOS_PERMITIDOS,
+    });
+} 
+   
+valores.push(id);
 
+const [resultado] = await pool.query(
+    `UPDATE usuarios SET ${camposParaAtualizar.json(',')} WHERE id = ?`,
+    valores
+);
+   if (resultado.affectedRows == 0){
+    return res.status(404).json({erro:'Usuário não encontrado.'});
+   }
+   
+   const [linhas] = await pool.query(
+    'SELECT id, nome, email, criado_em FROM ususarios WHERE id = ?',
+    [id]
+   );
+
+   
+   res.status(200).json({mensagem: 'Usuário atualizado com sucesso.', usuario: linhas[0] });
+} catch (error){
+    if (error.code === 'ER_DUP_ENTRY'){
+        return res.status(409).json({erro: 'Já existe um usuário com esse e-mail.'});
+    }
+    next(error);
+}}
 module.exports = {
     listarUsuarios,
     buscarUsuarioPorId,
     criarUsuario,
+    atualizarUsuario,
     excluirUsuario
 };
