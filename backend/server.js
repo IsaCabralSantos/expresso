@@ -8,6 +8,7 @@ const { rotaNaoEncontrada, tratadorDeErros } = require('./src/middlewares/errorH
 const tarefaRoutes = require('./src/routes/tarefaRoutes');
 const usuarioRoutes = require('./src/routes/usuarioRoutes');
 const feriadoRoutes = require('./src/routes/feriadoRoutes');
+const authRouters = require('./src/routes/authRoutes');
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.get('/health', async (req, res) => {
 app.use('/tarefas', tarefaRoutes);
 app.use('/usuarios', usuarioRoutes);
 app.use('/feriados', feriadoRoutes);
+app.use('/auth', authRouters);
 
 //------------ 3. TRATAMENTO DE ERROS ------------
 app.use(rotaNaoEncontrada);

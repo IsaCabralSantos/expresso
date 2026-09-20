@@ -67,7 +67,8 @@ async function excluirUsuario(req, res, next) {
 async function atualizarUsuario(req, res, next) {
     try{
         const { id } = req.params;
-        const CAMPOS_PERMITIDOS = [];
+        const CAMPOS_PERMITIDOS = ['nome', 'email','senha'];
+        const camposParaAtualizar = [];
         const valores = [];
     
         CAMPOS_PERMITIDOS.forEach((campo) =>  {
@@ -78,7 +79,7 @@ async function atualizarUsuario(req, res, next) {
         });
 if (camposParaAtualizar.length == 0){
     return res.status(400).json({
-        erro: 'Envie ao menos um campo para',
+        erro: 'Envie ao menos um campo para atualizar',
         campos_aceitos: CAMPOS_PERMITIDOS,
     });
 } 
